@@ -1,5 +1,11 @@
 #ifndef BUTTONMANAGER_H
 #define BUTTONMANAGER_H
+
+#include <Arduino.h>
+
+#define BUTTON_WRITE D2
+#define BUTTON_READ D4
+
 class ButtonManager {
 public:
     void setup();
@@ -9,5 +15,13 @@ public:
 private:
     int lastWriteState = HIGH;
     int lastReadState = HIGH;
+
+    int stableWriteState = HIGH;
+    int stableReadState = HIGH;
+
+    unsigned long lastWriteDebounceTime = 0;
+    unsigned long lastReadDebounceTime = 0;
+
+    static const unsigned long debounceDelay = 50; // 50 ms
 };
 #endif

@@ -1,10 +1,24 @@
-#include "WiFiManager.h"
-const char *ssid = "Marcia";
-const char *password = "504617cm";
+#include <Arduino.h>
+#include <ESP8266WiFi.h>
 
-void WiFiManager::setup() {
+#include "WiFiManager.h"
+
+bool WiFiManager::setup() {
     WiFi.begin(ssid, password);
+    int count = 0;
+    connected = true;
+
     while (WiFi.status() != WL_CONNECTED) {
         delay(500);
+        Serial.print(".");
+        count++;
+        if (count > 60) {  // Timeout after 30s
+            Serial.println("\nFailed to connect to WiFi");
+            connected = false;
+            return false;
+        }
     }
+
+    Serial.println("\nWiFi connected!");
+    return true;
 }

@@ -8,6 +8,7 @@
 GateControl gateControl;
 
 void setup() {
+    Serial.begin(115200);
     gateControl.setup();
 }
 

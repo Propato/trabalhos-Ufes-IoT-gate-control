@@ -23,26 +23,38 @@ void GateControl::handleState() {
                 currentState = WAIT_CARD_READ;
             }
             break;
+
         case WAIT_CARD_WRITE:
-            if (rfid.isCardPresent()) {
+            if (rfid.authenticate()) {
                 mqtt.requestSlot();
+                mqtt.awaitResponse();
                 currentState = WRITE_CARD;
             }
             break;
         case WRITE_CARD:
-            if (mqtt.hasSlot()) {
-                cardData = mqtt.getSlot();
-                rfid.writeCard(cardData);
+            String slot = mqtt.getSlot();
+            if (rfid.writeStringToCard(slot)) {
+                mqtt.resetSlot();
                 currentState = OPEN_GATE;
+            } else {
+                currentState = WAIT_CARD_WRITE;
             }
             break;
+
         case WAIT_CARD_READ:
-            if (rfid.isCardPresent()) {
-                cardData = rfid.readCard();
-                mqtt.sendExit(cardData);
-                currentState = OPEN_GATE;
+            if (rfid.authenticate()) {
+                currentState = READ_CARD;
             }
             break;
+        case READ_CARD:
+            String slot = rfid.readStringFromCard();
+            if (slot != "Reading failed") {
+                mqtt.sendExit(slot);
+                currentState = OPEN_GATE;
+            } else {
+                currentState = WAIT_CARD_READ;
+            }
+
         case OPEN_GATE:
             servo.open();
             currentState = CLOSE_GATE;

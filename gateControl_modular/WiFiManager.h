@@ -1,8 +1,13 @@
 #ifndef WIFIMANAGER_H
 #define WIFIMANAGER_H
-#include <ESP8266WiFi.h>
+
 class WiFiManager {
 public:
-    void setup();
+    bool setup();
+    bool isConnected() const { return connected; }
+private:
+    bool connected = false;
+    const char *ssid = "Marcia";
+    const char *password = "504617cm";
 };
 #endif

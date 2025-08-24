@@ -1,5 +1,4 @@
 #include "ServoManager.h"
-#define SERVO_PIN D3
 
 void ServoManager::setup() {
     s1.attach(SERVO_PIN);
@@ -8,7 +7,7 @@ void ServoManager::setup() {
 
 void ServoManager::open() {
     s1.write(180);
-    delay(2000);
+    delay(3000);
 }
 
 void ServoManager::close() {
