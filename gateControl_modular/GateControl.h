@@ -23,6 +23,7 @@ private:
     };
 
     State currentState = IDLE;
+    State lastState = IDLE;
 
     WiFiService wifi;
     MQTTService mqtt;

@@ -37,4 +37,9 @@ Este projeto implementa um sistema de controle de portão automatizado utilizand
 
 ---
 
+## To Do
+
+Corrigir loops infinitos (adicionar parada com X tempo de espera).
+Adicionar Retorno do mqtt de exit para confirmar que a saída esta correta para só assim liberar a catraca.
+
 David Propato e Klarine Mendonça - IoT Gate Control

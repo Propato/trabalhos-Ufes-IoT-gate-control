@@ -9,7 +9,6 @@ void RFIDService::setup() {
     mfrc522->PCD_Init();
 
     for (byte i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
-
     Serial.println(F("RFID Service initialized"));
 }
 
@@ -33,7 +32,6 @@ bool RFIDService::authenticate(byte trailerBlock) {
         return false;
     }
 
-    Serial.println(F("Authenticated"));
     return true;
 }
 
@@ -79,6 +77,8 @@ String RFIDService::readStringFromCard(byte blockAddr) {
 
     mfrc522->PICC_HaltA();
     mfrc522->PCD_StopCrypto1();
+
+    Serial.println(F("Free Slot: ") + str);
 
     return str;
 }
