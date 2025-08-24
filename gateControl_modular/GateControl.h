@@ -1,11 +1,11 @@
 #ifndef GATECONTROL_H
 #define GATECONTROL_H
 
-#include "WiFiManager.h"
-#include "MQTTManager.h"
-#include "RFIDManager.h"
-#include "ButtonManager.h"
-#include "ServoManager.h"
+#include "WiFiService.h"
+#include "MQTTService.h"
+#include "RFIDService.h"
+#include "ButtonService.h"
+#include "ServoService.h"
 
 class GateControl {
 public:
@@ -24,11 +24,11 @@ private:
 
     State currentState = IDLE;
 
-    WiFiManager wifi;
-    MQTTManager mqtt;
-    RFIDManager rfid;
-    ButtonManager buttons;
-    ServoManager servo;
+    WiFiService wifi;
+    MQTTService mqtt;
+    RFIDService rfid;
+    ButtonService buttons;
+    ServoService servo;
 
     void handleState();
 };

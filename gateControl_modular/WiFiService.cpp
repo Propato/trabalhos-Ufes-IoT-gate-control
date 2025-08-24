@@ -1,9 +1,9 @@
 #include <Arduino.h>
 #include <ESP8266WiFi.h>
 
-#include "WiFiManager.h"
+#include "WiFiService.h"
 
-bool WiFiManager::setup() {
+bool WiFiService::setup() {
     WiFi.begin(ssid, password);
     int count = 0;
     connected = true;

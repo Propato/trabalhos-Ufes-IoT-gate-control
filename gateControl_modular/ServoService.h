@@ -1,10 +1,10 @@
-#ifndef SERVOMANAGER_H
-#define SERVOMANAGER_H
+#ifndef SERVOSERVICE_H
+#define SERVOSERVICE_H
 
 #include <Servo.h>
 
 #define SERVO_PIN D3
-class ServoManager {
+class ServoService {
 public:
     void setup();
     void open();

@@ -1,10 +1,10 @@
-#ifndef MQTTMANAGER_H
-#define MQTTMANAGER_H
+#ifndef MQTTSERVICE_H
+#define MQTTSERVICE_H
 
 #include <PubSubClient.h>
 #include <ESP8266WiFi.h>
 
-class MQTTManager {
+class MQTTService {
 public:
     void setup();
     void loop();

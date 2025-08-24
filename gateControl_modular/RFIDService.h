@@ -1,5 +1,5 @@
-#ifndef RFIDMANAGER_H
-#define RFIDMANAGER_H
+#ifndef RFIDSERVICE_H
+#define RFIDSERVICE_H
 
 #include <MFRC522.h>
 #include <SPI.h>
@@ -9,7 +9,7 @@
 #define SS_PIN D8
 #define RST_PIN D1
 
-class RFIDManager {
+class RFIDService {
 public:
     void setup(); // passa pinos para setup
 

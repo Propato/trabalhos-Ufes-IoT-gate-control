@@ -1,12 +1,12 @@
-#ifndef BUTTONMANAGER_H
-#define BUTTONMANAGER_H
+#ifndef BUTTONSERVICE_H
+#define BUTTONSERVICE_H
 
 #include <Arduino.h>
 
 #define BUTTON_WRITE D2
 #define BUTTON_READ D4
 
-class ButtonManager {
+class ButtonService {
 public:
     void setup();
     void update();

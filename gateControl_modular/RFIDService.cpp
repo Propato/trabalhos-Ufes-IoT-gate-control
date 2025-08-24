@@ -1,6 +1,6 @@
-#include "RFIDManager.h"
+#include "RFIDService.h"
 
-void RFIDManager::setup() {
+void RFIDService::setup() {
     SPI.begin();
 
     if (mfrc522) delete mfrc522;
@@ -10,15 +10,15 @@ void RFIDManager::setup() {
 
     for (byte i = 0; i < 6; i++) key.keyByte[i] = 0xFF;
 
-    Serial.println(F("RFID Manager initialized"));
+    Serial.println(F("RFID Service initialized"));
 }
 
-bool RFIDManager::isCardPresent() {
+bool RFIDService::isCardPresent() {
     if (!mfrc522) return false;
     return mfrc522->PICC_IsNewCardPresent() && mfrc522->PICC_ReadCardSerial();
 }
 
-bool RFIDManager::authenticate(byte trailerBlock) {
+bool RFIDService::authenticate(byte trailerBlock) {
     if (!mfrc522) return false;
 
     while (!isCardPresent()) delay(50);
@@ -37,7 +37,7 @@ bool RFIDManager::authenticate(byte trailerBlock) {
     return true;
 }
 
-bool RFIDManager::writeStringToCard(const String& str, byte blockAddr) {
+bool RFIDService::writeStringToCard(const String& str, byte blockAddr) {
     if (!mfrc522) return false;
 
     byte buffer[18];
@@ -59,7 +59,7 @@ bool RFIDManager::writeStringToCard(const String& str, byte blockAddr) {
     return true;
 }
 
-String RFIDManager::readStringFromCard(byte blockAddr) {
+String RFIDService::readStringFromCard(byte blockAddr) {
     if (!mfrc522) return "Reading failed";
 
     byte buffer[18];

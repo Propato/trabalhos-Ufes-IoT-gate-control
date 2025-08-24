@@ -1,7 +1,7 @@
-#ifndef WIFIMANAGER_H
-#define WIFIMANAGER_H
+#ifndef WIFISERVICE_H
+#define WIFISERVICE_H
 
-class WiFiManager {
+class WiFiService {
 public:
     bool setup();
     bool isConnected() const { return connected; }

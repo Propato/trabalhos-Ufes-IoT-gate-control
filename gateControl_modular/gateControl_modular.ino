@@ -1,9 +1,9 @@
 #include "GateControl.h"
-#include "RFIDManager.h"
-#include "ButtonManager.h"
-#include "WiFiManager.h"
-#include "MQTTManager.h"
-#include "ServoManager.h"
+#include "RFIDService.h"
+#include "ButtonService.h"
+#include "WiFiService.h"
+#include "MQTTService.h"
+#include "ServoService.h"
 
 GateControl gateControl;
 

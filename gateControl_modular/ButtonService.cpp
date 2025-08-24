@@ -1,11 +1,11 @@
-#include "ButtonManager.h"
+#include "ButtonService.h"
 
-void ButtonManager::setup() {
+void ButtonService::setup() {
     pinMode(BUTTON_WRITE, INPUT_PULLUP);
     pinMode(BUTTON_READ, INPUT_PULLUP);
 }
 
-void ButtonManager::update() {
+void ButtonService::update() {
     int readingWrite = digitalRead(BUTTON_WRITE);
     int readingRead  = digitalRead(BUTTON_READ);
 
@@ -30,10 +30,10 @@ void ButtonManager::update() {
     lastReadState = readingRead;
 }
 
-bool ButtonManager::isWritePressed() {
+bool ButtonService::isWritePressed() {
     return stableWriteState == LOW;
 }
 
-bool ButtonManager::isReadPressed() {
+bool ButtonService::isReadPressed() {
     return stableReadState == LOW;
 }

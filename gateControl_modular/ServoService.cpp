@@ -1,16 +1,16 @@
-#include "ServoManager.h"
+#include "ServoService.h"
 
-void ServoManager::setup() {
+void ServoService::setup() {
     s1.attach(SERVO_PIN);
     close();
 }
 
-void ServoManager::open() {
+void ServoService::open() {
     s1.write(180);
     delay(3000);
 }
 
-void ServoManager::close() {
+void ServoService::close() {
     s1.write(0);
     delay(500);
 }

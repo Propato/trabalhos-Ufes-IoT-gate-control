@@ -1,12 +1,12 @@
-// MQTTManager.cpp
-#include "MQTTManager.h"
+// MQTTService.cpp
+#include "MQTTService.h"
 
 const char *mqtt_broker = "broker.hivemq.com";
 const char *mqtt_base_topic = "propato/ufes/iot/projeto";
 const char *DEVICE_ID = "G1";
 const int mqtt_port = 1883;
 
-void MQTTManager::internalCallback(char *topic, byte *payload, unsigned int length) {
+void MQTTService::internalCallback(char *topic, byte *payload, unsigned int length) {
     char message[length + 1];
     for (unsigned int i = 0; i < length; i++) {
        message[i] = (char)payload[i];
@@ -30,7 +30,7 @@ void MQTTManager::internalCallback(char *topic, byte *payload, unsigned int leng
     }
 }
 
-void MQTTManager::setup() {
+void MQTTService::setup() {
     mqtt_client = PubSubClient(espClient);
     mqtt_client.setServer(mqtt_broker, mqtt_port);
     mqtt_client.setCallback(internalCallback);
@@ -38,7 +38,7 @@ void MQTTManager::setup() {
     connected = connect();
 }
 
-bool MQTTManager::connect() {
+bool MQTTService::connect() {
     const int maxAttempts = 3;
     int attempt = 1;
 
@@ -66,11 +66,11 @@ bool MQTTManager::connect() {
     return false;
 }
 
-void MQTTManager::loop() {
+void MQTTService::loop() {
     mqtt_client.loop();
 }
 
-void MQTTManager::publishMessage(const String& topic, const String& message) {
+void MQTTService::publishMessage(const String& topic, const String& message) {
     if (!connected) connected = connect();
 
     if (connected) {
@@ -78,17 +78,17 @@ void MQTTManager::publishMessage(const String& topic, const String& message) {
     }
 }
 
-void MQTTManager::requestSlot() {
+void MQTTService::requestSlot() {
     String topic = String(mqtt_base_topic) + "/parking/entry";
     publishMessage(topic, String(DEVICE_ID));
 }
 
-void MQTTManager::sendExit(const String& data) {
+void MQTTService::sendExit(const String& data) {
     String topic = String(mqtt_base_topic) + "/parking/exit";
     publishMessage(topic, data);
 }
 
-void MQTTManager::awaitResponse() {
+void MQTTService::awaitResponse() {
     while (slot == "null") {
         mqtt_client.loop();
     }

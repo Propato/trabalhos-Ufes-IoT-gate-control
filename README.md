@@ -4,13 +4,13 @@ Este projeto implementa um sistema de controle de portão automatizado utilizand
 
 ## Estrutura do Projeto
 
-- `gateControl_modular.ino`: Arquivo principal, integra todos os módulos e implementa a lógica central.
-- `GateControl.h/.cpp`: Gerencia a máquina de estados e orquestra os módulos.
-- `RFIDManager.h/.cpp`: Gerencia leitura e escrita de cartões RFID.
-- `ButtonManager.h/.cpp`: Gerencia os botões físicos de leitura e escrita.
-- `WiFiManager.h/.cpp`: Gerencia conexão WiFi.
-- `MQTTManager.h/.cpp`: Gerencia comunicação MQTT (broker, tópicos, mensagens).
-- `ServoManager.h/.cpp`: Gerencia o servo motor responsável pela abertura/fechamento do portão.
+-   `gateControl_modular.ino`: Arquivo principal, integra todos os módulos e implementa a lógica central.
+-   `GateControl.h/.cpp`: Gerencia a máquina de estados e orquestra os módulos.
+-   `RFIDService.h/.cpp`: Gerencia leitura e escrita de cartões RFID.
+-   `ButtonService.h/.cpp`: Gerencia os botões físicos de leitura e escrita.
+-   `WiFiService.h/.cpp`: Gerencia conexão WiFi.
+-   `MQTTService.h/.cpp`: Gerencia comunicação MQTT (broker, tópicos, mensagens).
+-   `ServoService.h/.cpp`: Gerencia o servo motor responsável pela abertura/fechamento do portão.
 
 ## Funcionamento
 
@@ -20,18 +20,21 @@ Este projeto implementa um sistema de controle de portão automatizado utilizand
 4. **Abertura/Fechamento do portão**: O servo é acionado conforme o fluxo de entrada/saída.
 
 ## Requisitos
-- ESP8266
-- Leitor RFID MFRC522
-- Servo motor
-- Botões físicos
-- Broker MQTT (ex: HiveMQ)
-- Bibliotecas: `ESP8266WiFi`, `PubSubClient`, `MFRC522`, `Servo`, `ArduinoJson`
+
+-   ESP8266
+-   Leitor RFID MFRC522
+-   Servo motor
+-   Botões físicos
+-   Broker MQTT (ex: HiveMQ)
+-   Bibliotecas: `ESP8266WiFi`, `PubSubClient`, `MFRC522`, `Servo`, `ArduinoJson`
 
 ## Como usar
+
 1. Faça upload dos arquivos para o ESP8266.
 2. Ajuste as credenciais WiFi e tópicos MQTT conforme necessário.
 3. Conecte os componentes conforme os pinos definidos nos arquivos `.h`.
 4. Execute o sistema e monitore via Serial ou MQTT.
 
 ---
+
 David Propato e Klarine Mendonça - IoT Gate Control
