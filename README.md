@@ -1,45 +1,54 @@
 # Gate Control
 
-Este projeto implementa um sistema de controle de portão automatizado utilizando ESP8266, RFID, MQTT e máquina de estados.
+This project implements an automated gate control system using ESP8266, RFID, a State Machine, and MQTT for communication with the Web Manager.
 
-## Estrutura do Projeto
+## Project Structure
 
--   `gateControl_modular.ino`: Arquivo principal, integra todos os módulos e implementa a lógica central.
--   `GateControl.h/.cpp`: Gerencia a máquina de estados e orquestra os módulos.
--   `RFIDService.h/.cpp`: Gerencia leitura e escrita de cartões RFID.
--   `ButtonService.h/.cpp`: Gerencia os botões físicos de leitura e escrita.
--   `WiFiService.h/.cpp`: Gerencia conexão WiFi.
--   `MQTTService.h/.cpp`: Gerencia comunicação MQTT (broker, tópicos, mensagens).
--   `ServoService.h/.cpp`: Gerencia o servo motor responsável pela abertura/fechamento do portão.
+-   `gateControl.ino`: Main file, integrates all modules and implements the core logic.
+-   `GateControl.h/.cpp`: Manages the state machine and orchestrates the modules.
+-   `WiFiService.h/.cpp`: Handles WiFi connection.
+-   `MQTTService.h/.cpp`: Manages MQTT communication (broker, topics, messages).
+-   `RFIDService.h/.cpp`: Handles reading and writing RFID cards.
+-   `ButtonService.h/.cpp`: Manages physical buttons for reading and writing (software debounce).
+-   `ServoService.h/.cpp`: Controls the servo motor responsible for opening/closing the gate.
 
-## Funcionamento
+## How It Works
 
-1. **Inicialização**: Todos os módulos são configurados.
-2. **Escrita no cartão**: Ao pressionar o botão de escrita, o sistema solicita um slot via MQTT, aguarda resposta e grava no cartão RFID.
-3. **Leitura do cartão**: Ao pressionar o botão de leitura, o sistema lê o cartão RFID e envia o dado via MQTT para registrar a saída.
-4. **Abertura/Fechamento do portão**: O servo é acionado conforme o fluxo de entrada/saída.
+1. **Initialization:** All modules are configured and started.
+2. **Card Writing:** When the Entry button is pressed, the system requests a parking spot via MQTT from the Web Manager, waits for a response, and writes the spot info to the RFID card.
+3. **Card Reading:** When the Exit button is pressed, the system reads the RFID card and sends the data via MQTT to register the exit.
+4. **Gate Operation:** The servo motor is activated to open/close the gate according to entry/exit flow.
 
-## Requisitos
+## Requirements
 
+-   Arduino IDE
 -   ESP8266
--   Leitor RFID MFRC522
+-   MFRC522 RFID Reader
 -   Servo motor
--   Botões físicos
--   Broker MQTT (ex: HiveMQ)
--   Bibliotecas: `ESP8266WiFi`, `PubSubClient`, `MFRC522`, `Servo`, `ArduinoJson`
+-   Physical buttons (with software debounce)
+-   MQTT Broker (e.g., HiveMQ)
+-   Libraries: `ESP8266WiFi`, `PubSubClient`, `MFRC522`, `Servo`, `ArduinoJson`
 
-## Como usar
+## Circuit
 
-1. Faça upload dos arquivos para o ESP8266.
-2. Ajuste as credenciais WiFi e tópicos MQTT conforme necessário.
-3. Conecte os componentes conforme os pinos definidos nos arquivos `.h`.
-4. Execute o sistema e monitore via Serial ou MQTT.
+![Electronic schematic](./assets/schematic.png)
+
+> Fig. 1: Electronic schematic of the gate device.
+
+## Usage
+
+1. Upload the files to the ESP8266 using the Arduino IDE.
+2. Adjust WiFi credentials and MQTT topics as needed in the configuration files.
+3. Connect the hardware components according to the pin definitions in the `.h` files.
+4. Run the system and monitor via Serial output or MQTT messages.
 
 ---
 
 ## To Do
 
-Corrigir loops infinitos (adicionar parada com X tempo de espera).
-Adicionar Retorno do mqtt de exit para confirmar que a saída esta correta para só assim liberar a catraca.
+-   Fix infinite loops (add timeout for waiting operations).
+-   Add confirmation via MQTT for exit events to ensure the gate only opens after a successful exit registration.
 
-David Propato e Klarine Mendonça - IoT Gate Control
+---
+
+<h6 align="center">by David Propato <a href="https://github.com/Propato">@Propato</a> & Klarine Mendonça <a href="https://github.com/Klarinemend">@Klarinemend</a></h6>
